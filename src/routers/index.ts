@@ -15,10 +15,10 @@ router.post("/contato", async (req, res) => {
     let list: string[] = [];
 
     try {
-        const data = await readFile(dataSource, {encoding:"utf-8"});
+        const data = await readFile(dataSource, { encoding: "utf-8" });
         list = data.split("\n");
     } catch (error) {
-        
+
     }
 
     list.push(name);
@@ -26,6 +26,20 @@ router.post("/contato", async (req, res) => {
     await writeFile(dataSource, list.join("\n"));
 
     res.status(201).json({ contato: name });
+});
+
+
+router.get("/contatos", async (req, res) => {
+    let list: string[] = [];
+
+    try {
+        const data = await readFile(dataSource, { encoding: 'utf-8' });
+        list = data.split("\n");
+    } catch (error) {
+
+    }
+
+    res.json({ contatos: list });
 });
 
 export default router;
